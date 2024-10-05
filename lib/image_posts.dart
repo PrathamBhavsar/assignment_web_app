@@ -25,6 +25,8 @@ class _ImagePostsPageState extends State<ImagePostsPage> {
       child: ListView.builder(
         itemCount: isLikedList.length,
         itemBuilder: (context, index) {
+          String postId = 'image_post_$index'; // Generate unique postId
+
           return PostWidget(
             isLiked: isLikedList[index],
             postContent: Image.asset(
@@ -35,6 +37,7 @@ class _ImagePostsPageState extends State<ImagePostsPage> {
             userAccount: 'user$index',
             userName: 'User$index',
             toggleisLiked: () => _toggleisLiked(index),
+            postId: postId, // Pass the unique postId
           );
         },
       ),

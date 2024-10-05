@@ -25,6 +25,8 @@ class _VideoPostsPageState extends State<VideoPostsPage> {
       child: ListView.builder(
         itemCount: isLikedList.length,
         itemBuilder: (context, index) {
+          String postId = 'video_post_$index'; // Generate unique postId
+
           return PostWidget(
             isLiked: isLikedList[index],
             postContent: Icon(
@@ -36,6 +38,7 @@ class _VideoPostsPageState extends State<VideoPostsPage> {
             userAccount: 'user$index',
             userName: 'User$index',
             toggleisLiked: () => _toggleisLiked(index),
+            postId: postId, // Pass the unique postId
           );
         },
       ),
