@@ -1,7 +1,7 @@
-import 'package:assignment_web_app/post_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart'; // Required for Clipboard
 import 'package:assignment_web_app/constants/app_constants.dart';
+import 'package:go_router/go_router.dart'; // Import GoRouter
 
 class PostWidget extends StatefulWidget {
   const PostWidget({
@@ -30,7 +30,7 @@ class PostWidget extends StatefulWidget {
 class _PostWidgetState extends State<PostWidget> {
   void _sharePost() async {
     String link =
-        'https://yourapp.com/posts/${widget.postId}'; // Generate your link
+        'https://assignmen-app.web.app/posts/${widget.postId}'; // Generate your link
     await Clipboard.setData(ClipboardData(text: link)); // Copy to clipboard
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text('Link copied: $link')),
@@ -41,19 +41,7 @@ class _PostWidgetState extends State<PostWidget> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => PostDetailScreen(
-              userName: widget.userName,
-              userAccount: widget.userAccount,
-              time: widget.time,
-              postContent: widget.postContent,
-              isLiked: widget.isLiked,
-              toggleisLiked: widget.toggleisLiked,
-            ),
-          ),
-        );
+        context.go('/posts/${widget.postId}'); // Navigate using GoRouter
       },
       child: Container(
         width: MediaQuery.of(context).size.width,

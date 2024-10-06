@@ -22,7 +22,6 @@ class MyApp extends StatelessWidget {
         path: '/posts/:postId',
         builder: (context, state) {
           final postId = state.pathParameters['postId']!;
-          // Here you would fetch the relevant post data if needed
           return PostDetailScreen(
             userName: 'User Name', // Replace with actual data
             userAccount: 'user35475', // Replace with actual data
@@ -46,8 +45,7 @@ class MyApp extends StatelessWidget {
       routerDelegate: _router.routerDelegate,
       routeInformationParser: _router.routeInformationParser,
       routeInformationProvider: _router.routeInformationProvider,
-
-      restorationScopeId: 'app', // Add restorationScopeId to enable restoration
+      restorationScopeId: 'app',
     );
   }
 }
