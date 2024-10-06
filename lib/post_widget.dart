@@ -30,7 +30,7 @@ class PostWidget extends StatefulWidget {
 class _PostWidgetState extends State<PostWidget> {
   void _sharePost() async {
     String link =
-        'https://assignmen-app.web.app/posts/${widget.postId}'; // Generate your link
+        'https://assignmen-app.web.app/posts/${widget.postId}'; // Generate the link
     await Clipboard.setData(ClipboardData(text: link)); // Copy to clipboard
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text('Link copied: $link')),
@@ -41,7 +41,18 @@ class _PostWidgetState extends State<PostWidget> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.go('/posts/${widget.postId}'); // Navigate using GoRouter
+        // Navigate and pass the data
+        context.go(
+          '/posts/${widget.postId}',
+          extra: {
+            'userName': widget.userName,
+            'userAccount': widget.userAccount,
+            'time': widget.time,
+            'postContent': widget.postContent,
+            'isLiked': widget.isLiked,
+            'toggleisLiked': widget.toggleisLiked,
+          },
+        );
       },
       child: Container(
         width: MediaQuery.of(context).size.width,

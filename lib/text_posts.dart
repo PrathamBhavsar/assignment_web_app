@@ -25,7 +25,7 @@ class _TextPostsPageState extends State<TextPostsPage> {
       child: ListView.builder(
         itemCount: isLikedList.length,
         itemBuilder: (context, index) {
-          // Create a unique postId for each post, e.g., using the index
+          // Create a unique postId for each post
           String postId = 'post_$index';
 
           return PostWidget(

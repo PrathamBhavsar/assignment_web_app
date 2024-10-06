@@ -22,14 +22,31 @@ class MyApp extends StatelessWidget {
         path: '/posts/:postId',
         builder: (context, state) {
           final postId = state.pathParameters['postId']!;
+
+          // You can keep the previous check for extra if needed
+          if (state.extra == null) {
+            return PostDetailScreen(
+              postId: postId, // Pass the postId here
+              userName: 'Unknown User',
+              userAccount: 'unknown_account',
+              time: 'N/A',
+              postContent: Text('No content available.'),
+              isLiked: false,
+              toggleisLiked: () {},
+            );
+          }
+
+          final postDetails = state.extra as Map<String, dynamic>;
+
           return PostDetailScreen(
-            userName: 'User Name', // Replace with actual data
-            userAccount: 'user35475', // Replace with actual data
-            time: '9', // Replace with actual data
+            postId: postId, // Pass the postId here as well
+            userName: postDetails['userName'] ?? 'Unknown User',
+            userAccount: postDetails['userAccount'] ?? 'unknown_account',
+            time: postDetails['time'] ?? 'N/A',
             postContent:
-                Text('Content for post $postId'), // Placeholder content
-            isLiked: false, // Replace with actual data
-            toggleisLiked: () {}, // Implement if needed
+                postDetails['postContent'] ?? Text('No content available.'),
+            isLiked: postDetails['isLiked'] ?? false,
+            toggleisLiked: postDetails['toggleisLiked'] ?? () {},
           );
         },
       ),
